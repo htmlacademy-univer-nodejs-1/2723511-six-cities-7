@@ -1,55 +1,36 @@
-﻿import { readFileSync } from 'node:fs';
+﻿import { open } from 'node:fs/promises';
 import chalk from 'chalk';
+import { createOffer } from '../../helpers/offer.js';
 import { Command } from './command.interface.js';
-import { Offer, City, HousingType, Good, UserType } from '../../types/offer.type.js';
-
-function parseOffer(line: string): Offer {
-  const [
-    title, description, publishDate, city, previewImage, images,
-    isPremium, isFavorite, rating, type, rooms, guests, price, goods,
-    userName, email, avatarPath, password, userType, latitude, longitude,
-  ] = line.split('\t');
-
-  return {
-    title,
-    description,
-    publishDate: new Date(publishDate),
-    city: city as City,
-    previewImage,
-    images: images.split(';'),
-    isPremium: isPremium === 'true',
-    isFavorite: isFavorite === 'true',
-    rating: Number.parseFloat(rating),
-    type: type as HousingType,
-    rooms: Number.parseInt(rooms, 10),
-    guests: Number.parseInt(guests, 10),
-    price: Number.parseInt(price, 10),
-    goods: goods.split(';') as Good[],
-    author: { name: userName, email, avatarPath, password, type: userType as UserType },
-    commentsCount: 0,
-    latitude: Number.parseFloat(latitude),
-    longitude: Number.parseFloat(longitude),
-  };
-}
 
 export class ImportCommand implements Command {
-  public getName() {
+  public getName(): string {
     return '--import';
   }
 
-  public execute(filename?: string): void {
+  public async execute(filename?: string): Promise<void> {
     if (!filename) {
       console.error(chalk.red('Укажите путь к файлу: --import <path>'));
       return;
     }
-    try {
-      const offers = readFileSync(filename, 'utf-8')
-        .split('\n')
-        .filter((line) => line.trim() !== '')
-        .map(parseOffer);
 
-      offers.forEach((offer) => console.info(offer));
-      console.info(chalk.green(`Импортировано предложений: ${offers.length}`));
+    let lineNumber = 0;
+    let count = 0;
+
+    try {
+      const file = await open(filename);
+
+      for await (const line of file.readLines()) {
+        lineNumber++;
+        if (line.trim() === '') {
+          continue;
+        }
+        const offer = createOffer(line, lineNumber);
+        count++;
+        console.info(chalk.gray(`#${count}`), offer.title, chalk.cyan(offer.city));
+      }
+
+      console.info(chalk.green(`Импортировано предложений: ${count}`));
     } catch (error) {
       console.error(chalk.red(`Не удалось импортировать данные из файла ${filename}`));
       if (error instanceof Error) {

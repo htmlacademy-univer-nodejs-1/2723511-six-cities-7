@@ -1,0 +1,51 @@
+{
+  "offers": {
+    "titles": [
+      "Beautiful studio near the canal",
+      "Cozy apartment in the old town",
+      "Bright loft with a city view",
+      "Quiet room close to the cathedral",
+      "Modern flat next to the station",
+      "Family house with a small garden"
+    ],
+    "descriptions": [
+      "Bright and cozy place in the city center, ten minutes from the station.",
+      "Comfortable and quiet accommodation, perfect for a short city trip.",
+      "Spacious rooms, a fully equipped kitchen and a fast internet connection.",
+      "Renovated recently, close to cafes, shops and public transport.",
+      "A great choice for a family or a group of friends visiting the city."
+    ],
+    "cities": ["Paris", "Cologne", "Brussels", "Amsterdam", "Hamburg", "Dusseldorf"],
+    "previewImages": [
+      "https://example.com/img/preview1.jpg",
+      "https://example.com/img/preview2.jpg",
+      "https://example.com/img/preview3.jpg",
+      "https://example.com/img/preview4.jpg"
+    ],
+    "images": [
+      "https://example.com/img/1.jpg",
+      "https://example.com/img/2.jpg",
+      "https://example.com/img/3.jpg",
+      "https://example.com/img/4.jpg",
+      "https://example.com/img/5.jpg",
+      "https://example.com/img/6.jpg",
+      "https://example.com/img/7.jpg",
+      "https://example.com/img/8.jpg"
+    ],
+    "housingTypes": ["apartment", "house", "room", "hotel"],
+    "goods": [
+      "Breakfast", "Air conditioning", "Laptop friendly workspace",
+      "Baby seat", "Washer", "Towels", "Fridge"
+    ],
+    "users": [
+      { "name": "Yulia", "email": "yulia@example.com", "avatarPath": "avatar1.png" },
+      { "name": "Anna", "email": "anna@example.com", "avatarPath": "avatar2.png" },
+      { "name": "Max", "email": "max@example.com", "avatarPath": "avatar3.jpg" },
+      { "name": "Olga", "email": "olga@example.com", "avatarPath": "avatar4.jpg" },
+      { "name": "Ivan", "email": "ivan@example.com", "avatarPath": "avatar5.png" }
+    ],
+    "userTypes": ["обычный", "pro"]
+  }
+}
+
+

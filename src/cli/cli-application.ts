@@ -27,10 +27,10 @@ export class CLIApplication {
     return parsed;
   }
 
-  public processCommand(argv: string[]): void {
+  public async processCommand(argv: string[]): Promise<void> {
     const parsed = this.parseCommand(argv);
     const [name = this.defaultCommand] = Object.keys(parsed);
     const command = this.commands[name] ?? this.commands[this.defaultCommand];
-    command.execute(...(parsed[name] ?? []));
+    await command.execute(...(parsed[name] ?? []));
   }
 }
